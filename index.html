@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Run, Catniss, Run</title>
+	<meta name="viewport" content="width=500px, user-scalable=no">
+	<style>
+		body {
+			font-family: sans-serif;
+			text-align: center;
+		}
+		#catniss {
+			background: url(catniss.png) 0 0 no-repeat;
+			width: 500px;
+			height: 213px;
+			margin: auto;
+		}
+		button {
+			width: 125px;
+			height: 125px;
+			display: inline-block;
+			vertical-align: center;
+			text-align: center;
+			font-size: 36px;
+			margin: auto 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Run, Catniss, Run</h1>
+	<p>An HTML touch-powered animation prototype</p>
+	<div id="catniss"></div>
+	<p><small>Instructions: tap the buttons or use the keyboard to make Catniss run.</small></p>
+	<p>
+		<button id="J">J</button>
+		<button id="K">K</button>
+	</p>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="fastclick.js"></script>
+	<script>
+		$(function() {
+			// Eliminate 300ms delay in touch events
+			if (typeof FastClick != 'undefined') {
+				FastClick.attach(document.body);
+			}
+
+			var counter = 0;
+			var frameCount = 12;
+			var frameHeight = $('#catniss').height();
+
+			var pedometer = {
+				startTime : 0,
+				elapsedMilleseconds : 0,
+				start : function() {
+					pedometer.startTime = new Date().getTime();
+				},
+				update : function() {
+					pedometer.elapsedMilleseconds = new Date().getTime() - pedometer.startTime;
+				},
+				reset : function() {
+					pedometer.update();
+					var seconds = pedometer.elapsedMilleseconds / 1000;
+					pedometer.startTime = 0;
+					pedometer.elapsedMilleseconds = 0;
+					return seconds;
+				},
+				running : function() {
+					return pedometer.startTime > 0;
+				}
+			};
+
+			function advanceFrame() {
+				// Start the stopwatch
+				if ( ! pedometer.running()) {
+					pedometer.start();
+				} else {
+					pedometer.update();
+				}
+
+				// Increment the frame
+				counter++;
+				var frame = counter % frameCount;
+				var positionY = -frame * frameHeight;
+				$('#catniss').css('background-position', '0px ' + positionY + 'px');
+
+				// If a complete cycle, stop the pedometer and report
+				if (frame == 0) {
+					var time = pedometer.reset();
+					alert('Your time was: ' + time.toFixed(4) + ' seconds');
+				}
+			}
+
+			// Advance via keyboard
+			$('body').on('keydown', function(e) {
+				if ((counter % 2 == 0 && e.which == 74) || (counter % 2 == 1 && e.which == 75)) {
+					advanceFrame();
+				}
+			});
+
+			// Advance via button
+			$('#J, #K').on('mousedown', function(e) {
+				if ((counter % 2 == 0 && this.id == 'J') || (counter % 2 == 1 && this.id == 'K')) {
+					advanceFrame();
+				}
+			});
+
+			// Advance via button
+			$('#J, #K').on('touchstart', function(e) {
+				if ((counter % 2 == 0 && this.id == 'J') || (counter % 2 == 1 && this.id == 'K')) {
+					advanceFrame();
+				}
+			});
+		});
+	</script>
+</body>
+</html>

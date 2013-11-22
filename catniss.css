@@ -1,0 +1,77 @@
+.sprite {
+    background-image: url(catniss.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-01 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 0;
+}
+
+.sprite-02 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -213px;
+}
+
+.sprite-03 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -426px;
+}
+
+.sprite-04 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -639px;
+}
+
+.sprite-05 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -852px;
+}
+
+.sprite-06 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -1065px;
+}
+
+.sprite-07 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -1278px;
+}
+
+.sprite-08 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -1491px;
+}
+
+.sprite-09 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -1704px;
+}
+
+.sprite-10 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -1917px;
+}
+
+.sprite-11 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -2130px;
+}
+
+.sprite-12 {
+    width: 500px;
+    height: 213px;
+    background-position: 0 -2343px;
+}
